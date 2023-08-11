@@ -1,0 +1,9 @@
+{% if latest_meal_list %}
+    <ul>
+    {% for meal in latest_meal_list %}
+        <li><a href="{% url 'meals:detail'  meal.id %}">{{ meal.entree_choice_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No meals have been logged.</p>
+{% endif %}

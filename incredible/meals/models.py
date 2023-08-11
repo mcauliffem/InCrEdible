@@ -14,8 +14,8 @@ class Meal(models.Model):
     entree_rating = models.IntegerField(default=100)
     restaurant_name_text = models.CharField(max_length=200)
     date = models.DateTimeField("Date dined")
-    eaten_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    # eaten_by = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
-        retstr = str(entree_rating) + "/100 for " + str(entree_choice_text) + " at " + str(restaurant_name_text) + " on " + str(date)
+        retstr = str(self.entree_rating) + "/100 for " + str(self.entree_choice_text) + " at " + str(self.restaurant_name_text) + " on " + str(self.date)
         return retstr
 

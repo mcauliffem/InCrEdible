@@ -1,7 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse
-
+from .models import Meal
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the meals index.")
+    latest_meal_list = Meal.objects.order_by("-date")[:5]
+    context = {"latest_meal_list": latest_meal_list}
+    return render(request, "meals/index.html", context)
+
+def detail(request, meal_id):
+    meal = get_object_or_404(Meal, pk=meal_id)
+    return render(request, "meals/detail.html", {"meal": meal})
+
+
