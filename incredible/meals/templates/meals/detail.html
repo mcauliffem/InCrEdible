@@ -1,6 +1,20 @@
-<h1>{{ meal.entree_choice_text }} at {{ meal.restaurant_name_text }}</h1>
-<ul>
-    <li>{{ meal.entree_rating }} / 100</li>
-    <li>{{ meal.date }}
-</ul>
+{% extends "meals/base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ meal.restaurant_name_text }}</a>
+            <small class="text-muted">{{ meal.date }}</small>
+        </div>
+        <h2 class="article-title">{{ meal.entree_choice_text }}</a></h2>
+        <p class="article-content">{{ meal.entree_rating }} / 100</p>
+        <h2 class="article-content">Notes:</h2>
+        {% if meal.notes %}
+            <p class="article-content">{{ meal.notes}}</p>
+        {% else %}
+            <p class="article-content">No notes</p>
+        {% endif %}
+        </div>
+    </article>
+{% endblock content %}
 

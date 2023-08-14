@@ -12,6 +12,7 @@ class User(models.Model):
 class Meal(models.Model):
     entree_choice_text = models.CharField(max_length=200)
     entree_rating = models.IntegerField(default=100)
+    notes = models.CharField(max_length=500, default="")
     restaurant_name_text = models.CharField(max_length=200)
     date = models.DateTimeField("Date dined")
     # eaten_by = models.ForeignKey(User, on_delete=models.CASCADE)
