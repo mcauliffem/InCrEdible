@@ -1,13 +1,23 @@
 {% extends "meals/base.html" %}
 {% block content %}
-    <h2> List of most recent meals <h2>
-    {% if latest_meal_list %}
+    {% if type == "latest" %}
+        <h2> List of most recent meals <h2>
+    {% elif type == "restaurant" %}
+        {% if restaurant_name %}
+            <h2> List of dishes eaten at {{ restaurant_name }} </h2>
+        {% else %}
+            <h2> List of meals </h2>
+        {% endif %}
+    {% else %}
+        <h2> List of meals </h2>
+    {% endif %}
+    {% if meal_list %}
         <ul>
-        {% for meal in latest_meal_list %}
+        {% for meal in meal_list %}
             <article class="media content-section">
                 <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ meal.restaurant_name_text }}</a>
+                    <a class="mr-2" href="{% url 'meals:restaurant' meal.id %}">{{ meal.restaurant_name_text }}</a>
                     <small class="text-muted">{{ meal.date }}</small>
                 </div>
                 <h2><a class="article-title" href="{% url 'meals:detail'  meal.id %}">{{ meal.entree_choice_text }}</a></h2>
