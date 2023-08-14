@@ -3,7 +3,7 @@
     <article class="media content-section">
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ meal.restaurant_name_text }}</a>
+            <a class="mr-2" href="{% url 'meals:restaurant' meal.id %}">{{ meal.restaurant_name_text }}</a>
             <small class="text-muted">{{ meal.date }}</small>
         </div>
         <h2 class="article-title">{{ meal.entree_choice_text }}</a></h2>

@@ -9,7 +9,11 @@
             <h2> List of meals </h2>
         {% endif %}
     {% else %}
-        <h2> List of meals </h2>
+        {% if meal_list %}
+            <h2> List of meals </h2>
+        {% else %}
+            <h2> No meals </h2>
+        {% endif %}
     {% endif %}
     {% if meal_list %}
         <ul>
