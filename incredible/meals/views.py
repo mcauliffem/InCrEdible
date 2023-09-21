@@ -1,11 +1,13 @@
 from typing import Any, Dict
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
-    CreateView
+    CreateView,
+    UpdateView,
+    DeleteView
 )
 
 from .models import Meal
@@ -96,6 +98,34 @@ class MealCreateView(LoginRequiredMixin, CreateView):
         form.instance.entree_choice = form.instance.entree_choice.lower().title()
         form.instance.restaurant_name = form.instance.restaurant_name.lower().title()
         return super().form_valid(form)
+
+class MealUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Meal
+    fields = ['restaurant_name', 'entree_choice', 'entree_rating', 'notes']
+    template_name = 'meals/add.html'
+    
+    def form_valid(self, form):
+        form.instance.eaten_by = self.request.user
+        form.instance.entree_choice = form.instance.entree_choice.lower().title()
+        form.instance.restaurant_name = form.instance.restaurant_name.lower().title()
+        return super().form_valid(form)
+    
+    def test_func(self):
+        meal = self.get_object()
+        if self.request.user == meal.eaten_by:
+            return True
+        return False
+    
+class MealDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Meal
+    success_url = '/'
+
+    def test_func(self):
+        meal = self.get_object()
+        if self.request.user == meal.eaten_by:
+            return True
+        return False
+
 
 class RestaurantMealList(ListView):
     model = Meal

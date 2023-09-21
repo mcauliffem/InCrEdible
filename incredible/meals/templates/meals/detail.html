@@ -5,6 +5,13 @@
         <div class="article-metadata">
             <a class="mr-2" href="{% url 'meals:restaurant' meal.restaurant_name 'my' %}">{{ meal.restaurant_name }}</a>
             <small class="text-muted">{{ meal.date }}</small>
+            {% if meal.eaten_by == user  %}
+                <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'meals:meal-update' meal.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'meals:meal-delete' meal.id %}">Delete</a>
+                </div>
+                
+            {% endif %}
         </div>
         <h2 class="article-title">{{ meal.entree_choice }}</a></h2>
         <p class="article-content">{{ meal.entree_rating }} / 100</p>
