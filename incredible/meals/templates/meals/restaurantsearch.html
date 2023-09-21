@@ -1,0 +1,36 @@
+{% extends "meals/base.html" %}
+{% block content %}
+
+    {% if all_search_results %}
+        <h2> List of restaurants: </h2>
+    {% else %}
+        <h2> No restaurants </h2>
+    {% endif %}
+
+    {% if not user.is_authenticated %}
+    <article class="media content-section">
+        <div class="media-body">
+            <small class="text-muted">Please log in or register to see results specific to you.</small>
+        </div>
+    </article>
+    {% endif %}
+
+    <form class="media content-section" method="GET" action="" >
+        <input class="media-body" type="search" name="search"> 
+        <button class="mr-2" type="submit"> Search </button>
+    </form>
+    
+    {% for restaurant_name in all_search_results %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="{% url 'meals:restaurant' restaurant_name scope %}">{{ restaurant_name }}</a>
+        </div>
+        </div>
+    </article>
+    {% empty %}
+        <p>No restaurants match your search.</p>
+    {% endfor %}
+
+    
+{% endblock content %}

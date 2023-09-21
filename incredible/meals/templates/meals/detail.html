@@ -3,10 +3,10 @@
     <article class="media content-section">
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="{% url 'meals:restaurant' meal.id %}">{{ meal.restaurant_name_text }}</a>
+            <a class="mr-2" href="{% url 'meals:restaurant' meal.restaurant_name 'my' %}">{{ meal.restaurant_name }}</a>
             <small class="text-muted">{{ meal.date }}</small>
         </div>
-        <h2 class="article-title">{{ meal.entree_choice_text }}</a></h2>
+        <h2 class="article-title">{{ meal.entree_choice }}</a></h2>
         <p class="article-content">{{ meal.entree_rating }} / 100</p>
         <h2 class="article-content">Notes:</h2>
         {% if meal.notes %}

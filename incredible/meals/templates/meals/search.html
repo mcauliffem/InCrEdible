@@ -1,0 +1,45 @@
+{% extends "meals/base.html" %}
+{% block content %}
+    {% if type == "restaurant" %}
+        {% if r_name %}
+            <h2> List of dishes eaten at {{ r_name }}:</h2>
+        {% else %}
+            <h2> List of recent meals: </h2>
+        {% endif %}
+    {% else %}
+        {% if all_search_results %}
+            <h2> List of recent meals: </h2>
+        {% else %}
+            <h2> No results </h2>
+        {% endif %}
+    {% endif %}
+    {% if not user.is_authenticated %}
+    <article class="media content-section">
+        <div class="media-body">
+            <small class="text-muted">Please log in or register to see results specific to you.</small>
+        </div>
+    </article>
+    {% endif %}
+
+    <form class="media content-section" method="GET" action="" >
+        <input class="media-body" type="search" name="search"> 
+        <button class="mr-2" type="submit"> Search </button>
+    </form>
+    
+    {% for meal in all_search_results %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="{% url 'meals:restaurant' meal.restaurant_name scope %}">{{ meal.restaurant_name }}</a>
+            <small class="text-muted">{{ meal.date }}</small>
+        </div>
+        <h2><a class="article-title" href="{% url 'meals:meal-detail'  meal.id %}">{{ meal.entree_choice }}</a></h2>
+        <p class="article-content">{{ meal.entree_rating }} / 100</p>
+        </div>
+    </article>
+    {% empty %}
+        <p>No results match your search.</p>
+    {% endfor %}
+
+    
+{% endblock content %}

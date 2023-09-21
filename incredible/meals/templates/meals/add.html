@@ -1,4 +1,14 @@
 {% extends "meals/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-    <h1> Placeholder for the Add page</h1>
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Add a meal:</legend>
+        {{ form|crispy }}
+    </fieldset>
+    <div class="form-group">
+        <button class="btn-outline-info" type="submit">Submit</button>
+    </div>
+</form>
 {% endblock content %}
