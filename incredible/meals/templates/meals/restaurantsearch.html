@@ -23,7 +23,7 @@
     {% for restaurant_name in all_search_results %}
     <article class="media content-section">
         <div class="media-body">
-        <div class="article-metadata">
+        <div>
             <a class="mr-2" href="{% url 'meals:restaurant' restaurant_name scope %}">{{ restaurant_name }}</a>
         </div>
         </div>

@@ -16,15 +16,8 @@ class MealListView(ListView):
     model = Meal
     template_name = 'meals/home.html'
     context_object_name = 'meal_list'
-    ordering = ['-date']
-    paginate_by = 10
-
-    def get_queryset(self, *args, **kwargs):
-        qs = super(MealListView, self).get_queryset(*args, **kwargs)
-        qs = qs.order_by("-date")
-        if self.request.user.is_authenticated:
-            qs.filter(eaten_by = self.request.user)
-        return qs
+    paginate_by = 5
+    order_by = '-date'
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super(MealListView, self).get_context_data(**kwargs)
@@ -36,7 +29,6 @@ class MealSearchView(ListView):
     template_name = 'meals/search.html'
     context_object_name = 'all_search_results'
     paginate_by = 10
-    ordering=['entree_choice']
 
     def get_queryset(self):
         scope = self.kwargs['scope']
@@ -50,7 +42,10 @@ class MealSearchView(ListView):
         else:
             result = Meal.objects.all()
         if query:
-            result.filter(entree_choice__icontains=query)
+            print("flitering by query:")
+            print(query)
+            result = result.filter(entree_choice__icontains=query)
+        result = result.order_by('entree_choice')
         return result
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -76,7 +71,8 @@ class RestaurantSearchView(ListView):
         else:
             result = Meal.objects.values_list('restaurant_name', flat=True).distinct()
         if query:
-            result.filter(restaurant_name__icontains=query)
+            result = result.filter(restaurant_name__icontains=query)
+        result = result.order_by('restaurant_name')
         return result
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
@@ -132,16 +128,21 @@ class RestaurantMealList(ListView):
     template_name = 'meals/search.html'
     context_object_name = 'all_search_results'
     paginate_by = 10
-    ordering=['entree_choice']
 
     def get_queryset(self):
+        scope = self.kwargs['scope']
         result = super(RestaurantMealList, self).get_queryset()
         query = self.request.GET.get('search')
-        if query:
-            postresult = Meal.objects.filter(restaurant_name=self.kwargs['restaurant_name']).filter(entree_choice__icontains=query)
-            result = postresult
+        if scope == "my":
+            if self.request.user.is_authenticated:
+                result = Meal.objects.filter(eaten_by= self.request.user).filter(restaurant_name=self.kwargs['restaurant_name'])
+            else:
+                return []
         else:
-            result = Meal.objects.filter(restaurant_name=self.kwargs['restaurant_name'])
+            result = Meal.objects.all().filter(restaurant_name=self.kwargs['restaurant_name'])
+        if query:
+            result = result.filter(entree_choice__icontains=query)
+        result = result.order_by('entree_choice')
         return result
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
