@@ -25,12 +25,21 @@
         {% for meal in meal_list %}
             <article class="media content-section">
                 <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="{% url 'meals:restaurant' meal.restaurant_name scope %}">{{ meal.restaurant_name }}</a>
-                    <small class="text-muted">{{ meal.date }}</small>
-                </div>
-                <h2><a class="article-title" href="{% url 'meals:meal-detail'  meal.id %}">{{ meal.entree_choice }}</a></h2>
-                <p class="article-content">{{ meal.entree_rating }} / 100</p>
+                    <div class="article-metadata">
+                        <a class="mr-2" href="{% url 'meals:restaurant' meal.restaurant_name scope %}">{{ meal.restaurant_name }}</a>
+                        <small class="text-muted">{{ meal.date }}</small>
+                    </div>
+                    <h3><a class="article-title" href="{% url 'meals:meal-detail'  meal.id %}">{{ meal.entree_choice }}</a></h3>
+                    <!-- Star rating container -->
+                    <div class="star-rating">
+                        {% for val in starvalues %}
+                            {% if val <= meal.entree_rating %}
+                                <span class="star">&#9733;</span> <!-- Full star (Unicode star character) -->
+                            {% else %}
+                                <span class="empty-star">&#9734;</span> <!-- Empty star (Unicode star character) -->
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </article>
         {% endfor %}

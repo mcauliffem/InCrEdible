@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .btn-info {
-    background: #FF8C42;
+    background: #FFD166;
     color: #000000;
   }
 
@@ -103,6 +103,22 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .btn-info:hover {
-    background: #FFD166;
+    background: #FFE79A;
     color: #000000;
+  }
+
+  /* CSS for the star rating container */
+  .star-rating {
+    display: inline-block;
+    font-size: 24px; /* Adjust the font size as needed */
+  }
+
+  /* CSS for the individual star elements */
+  .star-rating .star {
+    color: #FFD700; /* Star color: Gold */
+  }
+
+  /* CSS for empty stars (if needed) */
+  .star-rating .empty-star {
+    color: #ccc; /* Empty star color: Light Gray */
   }

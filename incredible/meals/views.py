@@ -22,6 +22,7 @@ class MealListView(ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super(MealListView, self).get_context_data(**kwargs)
         context['scope'] = "all"
+        context['starvalues'] = [20,40,60,80,100]
         return context
     
 class MealSearchView(ListView):
@@ -51,6 +52,7 @@ class MealSearchView(ListView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super(MealSearchView, self).get_context_data(**kwargs)
         context['scope'] = self.kwargs['scope']
+        context['starvalues'] = [20,40,60,80,100]
         return context
     
 class RestaurantSearchView(ListView):
@@ -150,4 +152,5 @@ class RestaurantMealList(ListView):
         context['type'] = 'restaurant'
         context['r_name'] = self.kwargs['restaurant_name']
         context['scope'] = self.kwargs['scope']
+        context['starvalues'] = [20,40,60,80,100]
         return context
