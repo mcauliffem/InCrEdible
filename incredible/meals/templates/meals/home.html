@@ -22,7 +22,6 @@
     {% endif %}
 
     {% if meal_list %}
-        <ul>
         {% for meal in meal_list %}
             <article class="media content-section">
                 <div class="media-body">
@@ -35,7 +34,6 @@
                 </div>
             </article>
         {% endfor %}
-        </ul>
     {% else %}
         <p>No meals have been logged.</p>
     {% endif %}

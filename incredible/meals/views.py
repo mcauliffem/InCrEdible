@@ -28,7 +28,7 @@ class MealSearchView(ListView):
     model = Meal
     template_name = 'meals/search.html'
     context_object_name = 'all_search_results'
-    paginate_by = 10
+    paginate_by = 4
 
     def get_queryset(self):
         scope = self.kwargs['scope']

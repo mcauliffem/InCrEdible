@@ -1,27 +1,27 @@
 body {
-    background: #fafafa;
-    color: #333333;
-    margin-top: 5rem;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    color: #444444;
-  }
+  background: #FFE79A; /* Background color: Yellowish-Orange */
+  color: #333333; /* Text color: Dark gray */
+  margin-top: 5rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #FF8C42; /* Heading text color: Bright Orange */
+}
+
+.bg-steel {
+  background-color: #FF8C42; /* Background color for elements with class 'bg-steel': Bright Orange */
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #FFD166; /* Navbar link text color: Light Yellow */
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #FFE79A; /* Navbar link text color on hover: Yellowish-Orange */
+}
   
   ul {
     margin: 0;
-  }
-  
-  .bg-steel {
-    background-color: #5f788a;
-  }
-  
-  .site-header .navbar-nav .nav-link {
-    color: #cbd5db;
-  }
-  
-  .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
   }
   
   .site-header .navbar-nav .nav-link.active {
@@ -41,7 +41,7 @@ body {
   }
   
   a.article-title:hover {
-    color: #428bca;
+    color: #0d7006;
     text-decoration: none;
   }
   
@@ -81,4 +81,28 @@ body {
   
   .account-heading {
     font-size: 2.5rem;
+  }
+
+  .mr-2 {
+    color: #0d7006;
+  }
+
+  .btn-outline-info {
+    background: #0d7006;
+    color: #000000;
+  }
+
+  .btn-info {
+    background: #FF8C42;
+    color: #000000;
+  }
+
+  .btn-outline-info:hover {
+    background: #64b55e;
+    color: #000000;
+  }
+
+  .btn-info:hover {
+    background: #FFD166;
+    color: #000000;
   }
